@@ -39,7 +39,7 @@
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('propel', 'facebook_connect');
+$autoload['libraries'] = array('propel');
 
 
 /*
@@ -51,7 +51,7 @@ $autoload['libraries'] = array('propel', 'facebook_connect');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'park_info');
+$autoload['helper'] = array('url');
 
 
 /*

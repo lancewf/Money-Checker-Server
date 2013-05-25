@@ -12,12 +12,6 @@
 			</div>
 		</center>
 		
-		<script type="text/javascript" src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php"></script> 
-		
-		<script type="text/javascript"> 
-			FB.init("dd56f03346797a5c198f18fdda305b98","xd_receiver.htm"); 
-		</script> 
-		
 		<!-- OPTIONAL: include this if you want history support -->
     	<iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
     	<br /><br />

@@ -35,32 +35,23 @@ class Services extends Controller
 	
 	public function deletePurchase()
 	{
-		if($this->facebook_connect->isConnected())
-		{
-			$purchaseKey = $this->input->get_post('purchaseKey');
+			$purchaseKey = $this->input->post('purchaseKey');
 			$user = $this->user_model->getUser();
 			
 			$this->purchase_model->deletePurchase($purchaseKey, $user);
 			echo "Success";
-		}
-		else
-		{
-			echo "Failure";
-		}
 	}
 
 	public function modifyPurchase()
 	{
-		if($this->facebook_connect->isConnected())
-		{
-			$purchaseKey = $this->input->get_post('purchaseKey');
-			$store = $this->input->get_post('store');
-			$cost = (double)$this->input->get_post('cost');
-			$month = (int)$this->input->get_post('month');
-			$dayOfMonth = (int)$this->input->get_post('dayOfMonth');
-			$year = (int)$this->input->get_post('year');
+			$purchaseKey = $this->input->post('purchaseKey');
+			$store = $this->input->post('store');
+			$cost = (double)$this->input->post('cost');
+			$month = (int)$this->input->post('month');
+			$dayOfMonth = (int)$this->input->post('dayOfMonth');
+			$year = (int)$this->input->post('year');
 			$note = $this->input->post('note');
-			$billTypeKey = (int)$this->input->get_post('billTypeKey');
+			$billTypeKey = (int)$this->input->post('billTypeKey');
 
 			$user = $this->user_model->getUser();
 			
@@ -69,17 +60,10 @@ class Services extends Controller
 			$month, $dayOfMonth, $year, $user);
 
 			echo "Success";
-		}
-		else
-		{
-			echo "Failure";
-		}
 	}
 
 	public function processBankStatement()
 	{
-		if($this->facebook_connect->isConnected())
-		{
 			$config['upload_path'] = 'uploads/';
 			$config['allowed_types'] = 'qfx';
 			$config['max_size']	= '0';
@@ -117,17 +101,10 @@ class Services extends Controller
 
 				echo $output;
 			}
-		}
-		else
-		{
-			echo "Failure";
-		}
 	}
 
 	public function getBillTypes()
 	{
-		if($this->facebook_connect->isConnected())
-		{
 			$user = $this->user_model->getUser();
 			
 			$billTypes = $this->billtype_model->getBillTypes($user);
@@ -147,18 +124,10 @@ class Services extends Controller
 			$output .= "]";
 
 			echo $output;
-
-		}
-		else
-		{
-			echo "Failure";
-		}
 	}
 
 	public function getAllocatedAmounts()
 	{
-		if($this->facebook_connect->isConnected())
-		{
 			$user = $this->user_model->getUser();
 			$allocatedAmounts = $this->allotted_model->getAllottedAmounts($user);
 
@@ -177,41 +146,27 @@ class Services extends Controller
 			$output .= "]";
 
 			echo $output;
-		}
-		else
-		{
-			echo "Failure";
-		}
 	}
 
 	public function addPurchase()
 	{
-		if($this->facebook_connect->isConnected())
-		{
 			$user = $this->user_model->getUser();
-			$store = $this->input->get_post('store');
-			$cost = (double)$this->input->get_post('cost');
-			$month = (int)$this->input->get_post('month');
-			$dayOfMonth = (int)$this->input->get_post('dayOfMonth');
-			$year = (int)$this->input->get_post('year');
+			$store = $this->input->post('store');
+			$cost = (double)$this->input->post('cost');
+			$month = (int)$this->input->post('month');
+			$dayOfMonth = (int)$this->input->post('dayOfMonth');
+			$year = (int)$this->input->post('year');
 			$note = $this->input->post('note');
-			$billTypeKey = (int)$this->input->get_post('billTypeKey');
+			$billTypeKey = (int)$this->input->post('billTypeKey');
 
 			$this->purchase_model->addPurchase($store, $cost, $billTypeKey, $note,
 			$month, $dayOfMonth, $year, $user);
 
 			echo "Success";
-		}
-		else
-		{
-			echo "Failure";
-		}
 	}
 
 	public function getStores()
 	{
-		if($this->facebook_connect->isConnected())
-		{
 			$user = $this->user_model->getUser();
 			
 			$output = "";
@@ -222,17 +177,10 @@ class Services extends Controller
 			}
 
 			echo $output;
-		}
-		else
-		{
-			echo "Failure";
-		}
 	}
 
 	public function getCurrentViewItems()
 	{
-		if($this->facebook_connect->isConnected())
-		{
 			$user = $this->user_model->getUser();
 			$currentViewItems = $this->currentview_model->getCurrentViewItems($user);
 
@@ -251,26 +199,19 @@ class Services extends Controller
 			$output .= "]";
 
 			echo $output;
-		}
-		else
-		{
-			echo "Failure";
-		}
 	}
 
 	public function getMatchingPuchases()
 	{
-		if($this->facebook_connect->isConnected())
-		{
 			$user = $this->user_model->getUser();
-			$store = $this->input->get_post('store');
-			$cost = (double)$this->input->get_post('cost');
-			$month = (int)$this->input->get_post('month');
-			$dayOfMonth = (int)$this->input->get_post('dayOfMonth');
-			$year = (int)$this->input->get_post('year');
-			$note = $this->input->get_post('note');
-			$billTypeKey = (int)$this->input->get_post('billTypeKey');
-			
+			$store = $this->input->post('store');
+			$cost = (double)$this->input->post('cost');
+			$month = (int)$this->input->post('month');
+			$dayOfMonth = (int)$this->input->post('dayOfMonth');
+			$year = (int)$this->input->post('year');
+			$note = $this->input->post('note');
+			$billTypeKey = (int)$this->input->post('billTypeKey');
+
 			$purchases = $this->purchase_model->getMatchingPuchases($store, 
 				$cost, $billTypeKey, $note,
 				$month, $dayOfMonth, $year, $user);
@@ -290,18 +231,12 @@ class Services extends Controller
 			$output .= "]";
 
 			echo $output;
-		}
-		else
-		{
-			echo "Failure";
-		}
+	
 	}
 
 	public function getBillTypePurchases()
 	{
-		if($this->facebook_connect->isConnected())
-		{
-			$billTypeKey = (int)$this->input->get_post('billtypekey');
+			$billTypeKey = (int)$this->input->post('billtypekey');
 			$user = $this->user_model->getUser();
 			
 			$billType = $this->billtype_model->getBillType($billTypeKey);
@@ -330,31 +265,20 @@ class Services extends Controller
 			{
 				echo "Wrong user";
 			}
-		}
-		else
-		{
-			echo "Failure";
-		}
 	}
 
 	//
 	// should use recent an json object.
 	public function getPurchases()
 	{
-		if($this->facebook_connect->isConnected())
-		{
 			$user = $this->user_model->getUser();
-			$startMonth = (int)$this->input->get_post('startmonth');
-			$startdaymonth = (int)$this->input->get_post('startdaymonth');
-			$startyear = (int)$this->input->get_post('startyear');
-			$endmonth = (int)$this->input->get_post('endmonth');
-			$enddaymonth = (int)$this->input->get_post('enddaymonth');
-			$endyear = (int)$this->input->get_post('endyear');
+			$startMonth = (int)$this->input->post('startmonth');
+			$startdaymonth = (int)$this->input->post('startdaymonth');
+			$startyear = (int)$this->input->post('startyear');
+			$endmonth = (int)$this->input->post('endmonth');
+			$enddaymonth = (int)$this->input->post('enddaymonth');
+			$endyear = (int)$this->input->post('endyear');
 
-//			echo "$startMonth " . $startMonth . "$startdaymonth " . $startdaymonth . 
-//			"$startyear " . $startyear ."$endmonth " . $endmonth .
-//			"$enddaymonth " . $enddaymonth;
-			
 			$purchases = $this->purchase_model->getPurchases($startMonth, $startdaymonth,
 				$startyear, $endmonth, $enddaymonth, $endyear, $user);
 
@@ -373,11 +297,63 @@ class Services extends Controller
 			$output .= "]";
 
 			echo $output;
-		}
-		else
-		{
-			echo "Failure";
-		}
+	}
+
+	public function searchPurchases()
+	{
+			$user = $this->user_model->getUser();
+			$startMonth = (int)$this->input->post('startmonth');
+                        if(!$startMonth ) $startMonth = NULL;
+
+			$startdaymonth = (int)$this->input->post('startdaymonth');
+                        if(!$startdaymonth ) $startdaymonth = NULL;
+
+			$startyear = (int)$this->input->post('startyear');
+                        if(!$startyear) $startyear = NULL;
+
+			$endmonth = (int)$this->input->post('endmonth');
+                        if(!$endmonth ) $endmonth = NULL;
+
+			$enddaymonth = (int)$this->input->post('enddaymonth');
+                        if(!$enddaymonth ) $enddaymonth = NULL;
+
+			$endyear = (int)$this->input->post('endyear');
+                        if(!$endyear) $endyear = NULL;
+
+                        $billTypeKey = (int)$this->input->post('billtypekey');
+                        if(!$billTypeKey) $billTypeKey= NULL;
+
+                        $storeName = $this->input->post('storename');
+                        if(!$storeName) $storeName = NULL;
+
+                        $cost= (double)$this->input->post('cost');
+                        if(!$cost) $cost= NULL;
+
+                        $costComparison= $this->input->post('costcomparison');
+                        if(!$costComparison) $costComparison= NULL;
+
+                        $costRange= (double)$this->input->post('costrange');
+                        if(!$costRange) $costRange= NULL;
+                        
+			$purchases = $this->purchase_model->searchPurchases($startMonth, $startdaymonth,
+				$startyear, $endmonth, $enddaymonth, $endyear, $user, $billTypeKey, $storeName, 
+                                $cost, $costComparison, $costRange);
+
+			$output = "[";
+
+			foreach($purchases as $purchase)
+			{
+				$output .= $purchase->toJson() . ",";
+			}
+
+			if(strlen($output) > 1)
+			{
+				$output = substr($output, 0, strlen($output) - 1);
+			}
+
+			$output .= "]";
+
+			echo $output;
 	}
 }
 

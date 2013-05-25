@@ -9,11 +9,11 @@ class User_model extends Model
 	}
 	
 	public function getUser()
-	{ //real 653611718
+	{ 
 		
-		//$user_id = $this->facebook_connect->user_id;
+		$user_id = 653611718;
 		
-		$user = UserPeer::retrieveByPK("2388923");
+		$user = UserPeer::retrieveByPK($user_id);
 		
 		return $user;
 	}
