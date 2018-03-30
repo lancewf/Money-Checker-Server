@@ -1,0 +1,29 @@
+<?php
+class Billtype_model extends Model
+{
+	public function __construct()
+	{
+		parent::__construct();
+
+		require_once('persistence/Billtype.php');
+	}
+	 
+	public function getBillType($billTypeKey)
+	{
+		$billType = BilltypePeer::retrieveByPK($billTypeKey);
+		
+		return $billType;
+	}
+
+	public function getBillTypes($user)
+	{
+		$c = new Criteria();
+		$c->add(BilltypePeer::USER_ID, $user->getId(), Criteria::EQUAL);
+		$c->addAscendingOrderByColumn(BilltypePeer::NAME);
+
+		$billTypes = BilltypePeer::doSelect($c);
+
+		return $billTypes;
+	}
+}
+?>
