@@ -19,12 +19,11 @@ if !(mysql_ready) then
 fi
 
 mysql -h $MYSQL_IP -u {{bind.database.first.cfg.username}} -p{{bind.database.first.cfg.password}} -e "create database IF NOT EXISTS {{cfg.database_name}}"
-mysql -h $MYSQL_IP -u {{bind.database.first.cfg.username}} -p{{bind.database.first.cfg.password}} -D {{cfg.database_name}} < {{pkg.path}}/database/schema.sql
 
 # create mysql entry
 mkdir {{pkg.path}}/bin
-printf "#!/bin/bash\nmysql -h $MYSQL_IP -u {{bind.database.first.cfg.username}} -p{{bind.database.first.cfg.password}} \$@" >> {{pkg.path}}/bin/mysql.sh
-printf "#!/bin/bash\nmysql -h $MYSQL_IP -u {{bind.database.first.cfg.username}} -p{{bind.database.first.cfg.password}} -D {{cfg.database_name}} < \$1" >> {{pkg.path}}/bin/mysql_load.sh
+printf "#!/bin/bash\nmysql -h $MYSQL_IP -u {{bind.database.first.cfg.username}} -p{{bind.database.first.cfg.password}} \$@" > {{pkg.path}}/bin/mysql.sh
+printf "#!/bin/bash\nmysql -h $MYSQL_IP -u {{bind.database.first.cfg.username}} -p{{bind.database.first.cfg.password}} -D {{cfg.database_name}} < \$1" > {{pkg.path}}/bin/mysql_load.sh
 
 chmod +x {{pkg.path}}/bin/mysql.sh
 chown hab:hab {{pkg.path}}/bin/mysql.sh

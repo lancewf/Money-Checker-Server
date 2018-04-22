@@ -25,7 +25,7 @@ local_only=true
   export HAB_MONEY_CHECKER_SERVER="
 [http.listen]
 port = $MONEY_CHECKER_SERVER_PORT
-bind = '127.0.0.1'
+bind = '0.0.0.0'
 local_only=true
 "
 
@@ -60,6 +60,11 @@ function start() {
 function mysql_load_data() {
   install_if_missing core/mysql mysql;
   $(hab pkg path $HAB_ORIGIN/Money-Checker-Server)/bin/mysql_load.sh $1
+}
+
+function mysql_load_data_init() {
+  install_if_missing lancewf/mysql mysql;
+  $(hab pkg path $HAB_ORIGIN/Money-Checker-Server)/bin/mysql_load.sh $(hab pkg path $HAB_ORIGIN/Money-Checker-Server)/database/schema.sql
 }
 
 function mysql_shell() {
