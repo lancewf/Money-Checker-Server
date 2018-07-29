@@ -11,7 +11,7 @@
 |	http://example.com/
 |
 */
-$config['base_url'] = "http://".$_SERVER['HTTP_HOST'];
+$config['base_url'] = "https://".$_SERVER['HTTP_HOST'];
 //$config['base_url'] = "http://198.199.119.21/moneyreport/";
 /*
  * The name of the cookie that is placed on the clients computer. 
