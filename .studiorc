@@ -52,7 +52,7 @@ function start() {
 
   start_sup
 
-  hab start $HAB_ORIGIN/Money-Checker-Server --bind database:mysql.default --bind php:php.default
+  hab svc load $HAB_ORIGIN/Money-Checker-Server --bind database:mysql.default --bind php:php.default
 
   wait_or_fail_for_port_to_listen $MONEY_CHECKER_SERVER_PORT
 }
@@ -82,7 +82,7 @@ function start_php() {
 
   start_sup
 
-  hab start lancewf/php
+  hab svc load lancewf/php
 
   wait_or_fail_for_port_to_listen $PHP_PORT
 }
@@ -97,14 +97,14 @@ function start_mysql() {
 
   start_sup
 
-  hab start lancewf/mysql
+  hab svc load lancewf/mysql
 
   wait_or_fail_for_port_to_listen $MYSQL_PORT
 }
 
 function start_sup() {
   load_dev_config
-  hab sup status 2>/dev/null 1>&2
+  hab svc status 2>/dev/null 1>&2
   [[ $? == 0 ]] && return
   mkdir -p /hab/sup/default
   echo "=> Launching the Habitat Supervisor in the background..."
@@ -116,7 +116,7 @@ function start_sup() {
 }
 
 function status() {
- hab sup status;
+ hab svc status | column -t;
 }
 
 # Saves the in memory bash history to a file
